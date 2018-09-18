@@ -16,9 +16,17 @@ body {
   background-image: url('/background.jpg');
   background-repeat: no-repeat;
   background-size: 100%;
+  font: 2rem;
 }
-li{list-style: none;}
+li{
+  list-style: none;
+  font: 5rem ;
+}
 input,
 p {
   margin-left: 20px;
+}
+button{
+  border-radius: 40%;
+  height: 1.3rem;
 }

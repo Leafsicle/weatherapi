@@ -1,18 +1,30 @@
-const conditions = (humidity, temp, dayHigh) => {
+const conditions = (humidity, temp, dayHigh, dayLow) => {
   let weather = document.querySelector('.weatherconditions')
+
+  let tempLI = document.createElement('li')
+  tempLI.textContent = `it is currently ${temp}°F`
+  weather.appendChild(tempLI)
+
   let conditionsLI = document.createElement('li')
-  conditionsLI.textContent = `it is currently ${temp}°F`
-  weather.appendChild(conditionsLI)
   conditionsLI.textContent = `with a humidity of ${humidity}% `
   weather.appendChild(conditionsLI)
-  conditionsLI.textContent = `the Daily High is ${dayHigh}`
-  weather.appendChild(conditionsLI)
+
+  let highLI = document.createElement('li')
+  highLI.textContent = `today's high is ${dayHigh}°F`
+  weather.appendChild(highLI)
+
+  let lowLI = document.createElement('li')
+  lowLI.textContent = `today's low is ${dayLow}°F`
+  weather.appendChild(lowLI)
 
 }
+
+
+
+
+
 //use input value for telling the H1 where you are
 // look up how to hit enter to send it
-
-
 
 const main = () => {
   let button = document.querySelector('.search-button')
@@ -32,9 +44,9 @@ const main = () => {
         json => {
           const humidity = json.main.humidity
           const temp = json.main.temp
-          const dayLow = json.main.temp_min
           const dayHigh = json.main.temp_max
-          conditions(humidity, temp, dayHigh)
+          const dayLow = json.main.temp_min
+          conditions(humidity, temp, dayHigh, dayLow)
         }
       )
   })
