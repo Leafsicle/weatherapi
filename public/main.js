@@ -1,15 +1,3 @@
-class weatherAPI {
-  constructor(json) {
-    this.json = json
-  }
-  doTheThing(json) {
-    let weatherList = new weatherList('.weatherconditions')
-    weatherList.addCondition(parent, 'humidity', json.main.humidity)
-    weatherList.addCondition(parent, 'temp', json.main.temp)
-    weatherList.addCondition(parent, 'Dailyhigh', json.main.temp_max)
-    weatherList.addCondition(parent, 'Dailylow', json.main.temp_min)
-  }
-}
 
 class weatherList {
   constructor(parentSelector) {
@@ -29,9 +17,21 @@ class weatherList {
   }
 }
 
+class weatherAPI {
+  constructor(json) {
+    this.json = json
+  }
+  doTheThing(json) {
+    let WeatherList = new weatherList('.weatherconditions')
+    WeatherList.addCondition(parent, 'humidity', json.main.humidity)
+    WeatherList.addCondition(parent, 'temp', json.main.temp)
+    WeatherList.addCondition(parent, 'Dailyhigh', json.main.temp_max)
+    WeatherList.addCondition(parent, 'Dailylow', json.main.temp_min)
+  }
+}
+
 let parent = document.querySelector('.weatherconditions')
 const main = () => {
-  let weatherAPI = new weatherAPI(json)
   let button = document.querySelector('.search-button')
   let searchInput = document.querySelector('.search')
   button.addEventListener('click', event => {
@@ -46,11 +46,11 @@ const main = () => {
       )
       .then(
         json => {
-          let weatherAPI = new weatherAPI(json)
-          weatherAPI.doTheThing()
+          let WAPI = new weatherAPI(json)
+          WAPI.doTheThing(json)
         }
       )
-  }
+  })
 }
 
 document.addEventListener('DOMContentLoaded', main)
