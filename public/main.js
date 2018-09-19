@@ -1,11 +1,17 @@
-class fetch {
-  constructor(findThisThing) {
-    this.url =
-
-    
+class weatherAPI {
+  constructor(json) {
+    this.json = json
+  }
+  doTheThing(json) {
+    let weatherList = new weatherList('.weatherconditions')
+    weatherList.addCondition(parent, 'humidity', json.main.humidity)
+    weatherList.addCondition(parent, 'temp', json.main.temp)
+    weatherList.addCondition(parent, 'Dailyhigh', json.main.temp_max)
+    weatherList.addCondition(parent, 'Dailylow', json.main.temp_min)
+  }
 }
 
-class WeatherList {
+class weatherList {
   constructor(parentSelector) {
     this.parent = document.querySelector(parentSelector)
   }
@@ -18,16 +24,16 @@ class WeatherList {
   addCondition(parent, className, word) {
     let newLi = document.createElement('li')
     newLi.classList.add('conditions')
-    newLi.textContent = "the " + className + " is " + word
+    newLi.textContent = 'the ' + className + ' is ' + word
     parent.appendChild(newLi)
   }
 }
 
 let parent = document.querySelector('.weatherconditions')
 const main = () => {
+  let weatherAPI = new weatherAPI(json)
   let button = document.querySelector('.search-button')
   let searchInput = document.querySelector('.search')
-
   button.addEventListener('click', event => {
     let searchInputValue = searchInput.value
 
@@ -40,14 +46,11 @@ const main = () => {
       )
       .then(
         json => {
-          let weatherList = new WeatherList('.weatherconditions')
-          weatherList.addCondition(parent, 'humidity', json.main.humidity)
-          weatherList.addCondition(parent, 'temp', json.main.temp)
-          weatherList.addCondition(parent, 'Dailyhigh', json.main.temp_max)
-          weatherList.addCondition(parent, 'Dailylow', json.main.temp_min)
+          let weatherAPI = new weatherAPI(json)
+          weatherAPI.doTheThing()
         }
       )
   }
-  )
 }
+
 document.addEventListener('DOMContentLoaded', main)
